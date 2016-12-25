@@ -177,6 +177,30 @@ class apiplus
         return $arr;
     }
     
+    public function _prices_retail($sid)
+    {
+        $arr = array(
+            'error' => 1,
+            'error_code' => 0,
+            'error_message' => '',
+            'prices_retail' => array()
+        );
+        
+        if (!empty($sid))
+        {
+            $get = $this->_get_uri('http://brainapi.next.in.ua/v1/prices_retail?sid='.$sid);
+            $js = json_decode($get);
+            if ($js->error == 1){
+                return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'prices_retail'=>array());
+            } else 
+            {
+                return array('error'=>0,'error_code'=>0,'error_message'=>'','prices_retail'=>$js->prices_retail);
+            }
+        }
+        
+        return $arr;
+    }
+    
     public function _download_image($img_uri,$to_file)
     {
         $ch = curl_init ($img_uri);
