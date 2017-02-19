@@ -1,4 +1,5 @@
 <?php
+if (!defined('DIR_APPLICATION')) exit('No direct script access allowed');
 
 class apiplus
 {
@@ -90,6 +91,33 @@ class apiplus
                 return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'categories'=>array());
             } else {
                 return array('error'=>0,'error_code'=>0,'error_message'=>'','categories'=>$js->categories);
+            }
+        }
+        
+        return $arr;
+    }
+    
+    public function _prod_ids_category($sid,$id)
+    {
+        $arr = array(
+            'error' => 1,
+            'error_code' => 0,
+            'error_message' => '',
+            'products' => array()
+        );
+        
+        if (empty($id) || !is_numeric($id) || $id < 1){
+            return array('error'=>1,'error_code'=>0,'error_message'=>'No category ID set','products'=>array());
+        }
+        
+        if (!empty($sid))
+        {
+            $get = $this->_get_uri('http://brainapi.next.in.ua/v1/category?sid='.$sid.'&id='.(int)($id));
+            $js = json_decode($get);
+            if ($js->error == 1){
+                return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'products'=>array());
+            } else {
+                return array('error'=>0,'error_code'=>0,'error_message'=>'','products'=>$js->products);
             }
         }
         
