@@ -236,8 +236,9 @@ class apiplus
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
         $raw=curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close ($ch);
-        if (!file_exists($to_file))
+        if ($httpcode!=404 && $httpcode!=403 && !file_exists($to_file))
         {
             $fp = fopen($to_file,'x');
             fwrite($fp, $raw);
