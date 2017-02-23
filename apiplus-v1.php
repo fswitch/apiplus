@@ -205,6 +205,30 @@ class apiplus
         return $arr;
     }
     
+    public function _filters_all($sid,$cat_id)
+    {
+        $arr = array(
+            'error' => 1,
+            'error_code' => 0,
+            'error_message' => '',
+            'filters_all' => array()
+        );
+        
+        if (!empty($sid) && is_numeric($cat_id))
+        {
+            $get = $this->_get_uri('http://brainapi.next.in.ua/v1/filters_all?sid='.$sid.'&id='.(int)($cat_id));
+            $js = json_decode($get);
+            if ($js->error == 1){
+                return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'filters_all'=>array());
+            } else 
+            {
+                return array('error'=>0,'error_code'=>0,'error_message'=>'','filters_all'=>$js->filters_all);
+            }
+        }
+        
+        return $arr;
+    }
+    
     public function _prices_retail($sid)
     {
         $arr = array(
