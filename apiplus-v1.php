@@ -271,7 +271,7 @@ class apiplus
                 return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'prices_opt'=>array());
             } else 
             {
-                return array('error'=>0,'error_code'=>0,'error_message'=>'','prices_opt'=>$js->prices_retail);
+                return array('error'=>0,'error_code'=>0,'error_message'=>'','prices_opt'=>$js->prices_opt);
             }
         }
         
