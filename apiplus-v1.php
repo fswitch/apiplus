@@ -1,4 +1,5 @@
 <?php
+
 if (!defined('DIR_APPLICATION')) exit('No direct script access allowed');
 
 class apiplus
