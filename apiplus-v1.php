@@ -218,9 +218,9 @@ class apiplus
         {
             $get = $this->_get_uri('http://brainapi.next.in.ua/v1/filters_all?sid='.$sid.'&id='.(int)($cat_id));
             $js = json_decode($get);
-            if ($js->error == 1){
+            if (isset($js->error) && $js->error == 1){
                 return array('error'=>1,'error_code'=>$js->code,'error_message'=>$js->msg,'filters_all'=>array());
-            } else 
+            } elseif (isset($js->filters_all))
             {
                 return array('error'=>0,'error_code'=>0,'error_message'=>'','filters_all'=>$js->filters_all);
             }
