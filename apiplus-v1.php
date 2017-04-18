@@ -1,7 +1,5 @@
 <?php
 
-if (!defined('DIR_APPLICATION')) exit('No direct script access allowed');
-
 class apiplus
 {
     public function _api_auth($email,$password_md5)
